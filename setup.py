@@ -7,7 +7,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 setup(
     name="solidity-merkletools",
-    version="0.0.1",
+    version="0.0.2",
     description="Merkle Tools",
     classifiers=[
         "Intended Audience :: Developers",
