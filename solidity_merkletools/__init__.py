@@ -2,25 +2,25 @@ from web3 import Web3
 
 
 # This is a fork of https://github.com/Tierion/pymerkletools/blob/master/merkletools/__init__.py
-# It didn't support using Web3's SolidityKeccak so we modify the merkle implementation here to support it.
+# It didn't support using Web3's solidity_keccak so we modify the merkle implementation here to support it.
 # Matches the implementation in merkletreejs with arguments: this.tree = new MerkleTree(addresses, ethers.utils.keccak256, { sortPairs: true });
 class MerkleTools(object):
     def __init__(self):
         self.reset_tree()
 
-    # Changed the hash function to use solidityKeccak
+    # Changed the hash function to use solidity_keccak
     def hash_address(self, value) -> str:
-        return Web3.solidityKeccak(["address"], [value])
+        return Web3.solidity_keccak(["address"], [value])
 
     def hash_bytes(self, value) -> str:
-        return Web3.solidityKeccak(["bytes32"], [value])
+        return Web3.solidity_keccak(["bytes32"], [value])
 
     # Corresponds to merklejs sortPairs=True. Hash the pairs in sorted order.
     def hash_pair(self, v1, v2) -> str:
         if v1 < v2:
-            val = Web3.solidityKeccak(["bytes32", "bytes32"], [v1, v2])
+            val = Web3.solidity_keccak(["bytes32", "bytes32"], [v1, v2])
         else:
-            val = Web3.solidityKeccak(["bytes32", "bytes32"], [v2, v1])
+            val = Web3.solidity_keccak(["bytes32", "bytes32"], [v2, v1])
         return val
 
     def _to_hex(self, x):
